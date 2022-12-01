@@ -1,0 +1,65 @@
+Create Table IMPIEGO (
+IDImpiego int primary key identity not null,
+TipoImpiego nvarchar(max) not null,
+DataAssunzione Datetime not null
+)
+
+Create Table IMPIEGATO (
+IDImpiegato int primary key identity not null,
+Cognome nvarchar(max) not null,
+Nome nvarchar(max) not null,
+CodiceFiscale char(16) unique not null,
+Eta int not null,
+RedditoMensile money not null,
+DetrazioneFiscale bit not null,
+IDImpiego int not null
+
+Constraint FK_IMPIEGATO_IMPIEGO
+Foreign key (IDImpiego) references IMPIEGO (IDImpiego)
+)
+
+Insert INTO IMPIEGO VALUES ('Manager', '2015-01-01')
+Insert INTO IMPIEGO VALUES ('Ingegnere', '2016-01-01')
+Insert INTO IMPIEGO VALUES ('Contabile', '2017-01-01')
+Insert INTO IMPIEGO VALUES ('Operaio', '2018-01-01')
+Insert INTO IMPIEGO VALUES ('Stagista', '2019-01-01')
+Insert INTO IMPIEGO VALUES ('Fotocopiatore', '2020-01-01')
+
+Insert INTO IMPIEGATO VALUES ('Stisco', 'Ge', 'nhg5ngvw9o58', 50, 4000, 1, 1)
+Insert INTO IMPIEGATO VALUES ('Tutto', 'Controllo', 'mpxo7g43', 27, 2500, 0, 1)
+Insert INTO IMPIEGATO VALUES ('Ger', 'Mana', 'moyc87ow', 48, 3800, 1, 1)
+
+Insert INTO IMPIEGATO VALUES ('Gnere', 'Inge', 'mhc0gv7h074g', 35, 3000, 1, 2)
+Insert INTO IMPIEGATO VALUES ('Tista', 'Proget', 'mch087wh5', 22, 2400, 0, 2)
+Insert INTO IMPIEGATO VALUES ('Tore', 'Costrut', '7hn5w4n57n45', 47, 3700, 1, 2)
+Insert INTO IMPIEGATO VALUES ('Tore', 'Disegna', 'n54vy7n54v', 37, 2700, 0, 2)
+
+Insert INTO IMPIEGATO VALUES ('Bile', 'Conta', '7ny35t27ny5', 48, 2500, 1, 3)
+Insert INTO IMPIEGATO VALUES ('Ratore', 'Nume', 'h7n5n54y75', 28, 1500, 0, 3)
+Insert INTO IMPIEGATO VALUES ('Primo', 'Numero', 'n54v7n5g5vg8y9', 41, 3000, 1, 3)
+Insert INTO IMPIEGATO VALUES ('Quadrata', 'Radice', '57n05vn75gv', 35, 2000, 0, 3)
+
+Insert INTO IMPIEGATO VALUES ('Raio', 'Ope', '757y4f295yn', 47, 1300, 1, 4)
+Insert INTO IMPIEGATO VALUES ('Tanto', 'Lavoro', '7n5n747n484y', 40, 1200, 0, 4)
+Insert INTO IMPIEGATO VALUES ('Ognigiorno', 'Fatico', 'hnfehffoyn78', 27, 1100, 1, 4)
+Insert INTO IMPIEGATO VALUES ('Promozione', 'Cerco', 'uigiugee9844tuh9', 35, 1200, 0, 4)
+
+Insert INTO IMPIEGATO VALUES ('Tenente', 'Nulla', 'hefghoeg8n5r', 18, 800, 1, 5)
+Insert INTO IMPIEGATO VALUES ('Speranze', 'Senza', 'uauigegr784g3', 19, 900, 0, 5)
+Insert INTO IMPIEGATO VALUES ('Malissimo', 'Sfruttato', 'hufbfhr89g4y', 18, 800, 1, 5)
+Insert INTO IMPIEGATO VALUES ('Apagamento', 'Schiavo', 'gng489g389yg5h', 19, 900, 0, 5)
+
+Insert INTO IMPIEGATO VALUES ('Ponzani', 'Simone', 'vbnuhb98', 36, 600, 0, 6)
+
+Select * from IMPIEGATO where Eta > 29
+Select * from IMPIEGATO where RedditoMensile >= 800
+Select * from IMPIEGATO where DetrazioneFiscale = 1
+Select * from IMPIEGATO where DetrazioneFiscale = 0
+Select * from IMPIEGATO where Cognome like 'G%'
+Select COUNT(*) as Impiegati from IMPIEGATO
+Select SUM(RedditoMensile) as SommaRedditi from IMPIEGATO
+Select AVG(RedditoMensile) as MediaRedditi from IMPIEGATO
+Select MAX(RedditoMensile) as MassimoReddito from IMPIEGATO
+Select Min(RedditoMensile) as MassimoReddito from IMPIEGATO
+Select IMPIEGATO.Cognome, IMPIEGATO.Nome, IMPIEGO.DataAssunzione from IMPIEGATO inner join IMPIEGO on IMPIEGATO.IDImpiego = IMPIEGO.IDImpiego where DataAssunzione between '2007-01-01' and '2008-01-01'
+Select AVG(Eta) as MediaEta from IMPIEGATO
